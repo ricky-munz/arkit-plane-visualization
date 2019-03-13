@@ -41,6 +41,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        // Cast ARAnchor as ARPlaneAnchor, get the child node of the anchor, and cast that node's geometry as an SCNPlane
+        guard
+            let planeAnchor = anchor as? ARPlaneAnchor,
+            let planeNode = node.childNodes.first,
+            let planeGeometry = planeNode.geometry as? SCNPlane
+            else { return }
 
+        // Update the dimensions of the plane geometry based on the plane anchor.
+        planeGeometry.width = CGFloat(planeAnchor.extent.x)
+        planeGeometry.height = CGFloat(planeAnchor.extent.z)
+
+        // Update the position of the plane node based on the plane anchor.
+        planeNode.position = SCNVector3(planeAnchor.center.x, planeAnchor.center.y, planeAnchor.center.z)
     }
 }
