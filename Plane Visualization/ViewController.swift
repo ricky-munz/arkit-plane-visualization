@@ -32,6 +32,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let height = CGFloat(planeAnchor.extent.z)
         let planeGeometry = SCNPlane(width: width, height: height)
 
+        // Add material to SCNPlane
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.blue.withAlphaComponent(0.8)
+        planeGeometry.materials = [material]
+
         // Create a SCNNode from the SCNPlane geometry
         let planeNode = SCNNode(geometry: planeGeometry)
         planeNode.position = SCNVector3(planeAnchor.center.x, planeAnchor.center.y, planeAnchor.center.z)
