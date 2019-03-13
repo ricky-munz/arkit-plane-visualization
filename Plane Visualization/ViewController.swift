@@ -35,6 +35,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Create a SCNNode from the SCNPlane geometry
         let planeNode = SCNNode(geometry: planeGeometry)
         planeNode.position = SCNVector3(planeAnchor.center.x, planeAnchor.center.y, planeAnchor.center.z)
+        planeNode.eulerAngles.x = -.pi / 2
 
         // Add the newly created plane node as a child of the node created for the ARAnchor
         node.addChildNode(planeNode)
